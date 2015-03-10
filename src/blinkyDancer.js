@@ -1,5 +1,4 @@
 var BlinkyDancer = function(top, left, timeBetweenSteps){
-
   Dancer.apply(this, arguments);
 };
 
@@ -11,5 +10,11 @@ BlinkyDancer.prototype.step = function() {
 }
 
 var makeBlinkyDancer = function(top, left, timeBetweenSteps){
-  return new BlinkyDancer(arguments);
+  return new BlinkyDancer(top, left, timeBetweenSteps);
+}
+
+var makeManyBlinkyDancer = function(top, left, timeBetweenSteps){
+  var oneBlinkyDancer = new BlinkyDancer(top, left, timeBetweenSteps); 
+  oneBlinkyDancer.makeManyDancers();
+  return oneBlinkyDancer;
 }

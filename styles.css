@@ -3,7 +3,9 @@ body, html{
 }
 body{
   margin: 0px;
-  background-color:#444;
+  background-color:#000;
+  background-image: url('http://juliewight.com/wp-content/uploads/2013/11/quote-desktop-backgrounds.jpg');
+  background-repeat: no-repeat;
   font-size: 18px;
 }
 body, a:link, a:visited, a:active{
