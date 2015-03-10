@@ -8,7 +8,8 @@ var Dancer = function(top, left, timeBetweenSteps){
   this.timeBetweenSteps = timeBetweenSteps;
   this.top = top;
   this.left = left;
-  this.leader = null;
+  this.eater = null;
+  this.exists = true;
 
   //random color, random location
   this.$node.css({'border-color':'rgb('+
@@ -22,7 +23,16 @@ var Dancer = function(top, left, timeBetweenSteps){
 Dancer.prototype.step = function(){
 
   // schedules the next step
-  setTimeout(this.step.bind(this), this.timeBetweenSteps);
+  if (this.exists) {
+    setTimeout(this.step.bind(this), this.timeBetweenSteps);
+    for (var i=0; i < window.eaters.length; i++) {
+      if (Math.pow(this.top - window.eaters[i].top,2) + Math.pow(this.left - window.eaters[i].left,2) < Math.pow(window.eaters[i].borderWidth + 10, 2)) {
+        this.collide();
+        window.eaters[i].collide();
+        break;
+      }
+    }
+  }
 };
 
 Dancer.prototype.setPosition = function(top, left){
@@ -50,3 +60,8 @@ Dancer.prototype.makeManyDancers = function() {
 Dancer.prototype.lineUp = function() {
   this.$node.animate({top:$("body").height()/2}, 5000);
 };
+
+Dancer.prototype.collide = function() {
+  this.$node.remove();
+  this.exists = false;
+}
