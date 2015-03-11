@@ -57,7 +57,7 @@ $(document).ready(function(){
     reset();
     var dancerType;
     var dancerMakers = ['PrancerDancer', 'BlinkyDancer', 'CandyDancer'];
-    for (var i=0; i<750; i++) {
+    for (var i=0; i<500; i++) {
       dancerType = dancerMakers[Math.floor(dancerMakers.length*Math.random())];
       var dancerMakerFunction = window[dancerType];
       var dancer = new dancerMakerFunction(
@@ -97,11 +97,13 @@ $(document).ready(function(){
       if (!$('.dancer')[i].parent.exists)
         $('.dancer')[i].parent.die();
     }
-    setTimeout(function() {
-      if (window.dancers.length === window.eaters.length) {
-        buildEcosystem();
-      }
-    },10000);
+    if (window.dancers.length === window.eaters.length) {
+      setTimeout(function() {
+        if (window.dancers.length === window.eaters.length) {
+          buildEcosystem();
+        }
+      },10000);
+    }
   },200);
 });
 
