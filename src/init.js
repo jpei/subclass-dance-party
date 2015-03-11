@@ -46,11 +46,15 @@ $(document).ready(function(){
   });
 
   $('.reset').on('click', function(event) {
+    reset();
+  });
+  var reset = function() {
     for (var i=0; i<window.dancers.length; i++) {
       window.dancers[i].die();
     }
-  });
+  }
   var buildEcosystem = function() {
+    reset();
     var dancerType;
     var dancerMakers = ['PrancerDancer', 'BlinkyDancer', 'CandyDancer'];
     for (var i=0; i<750; i++) {
