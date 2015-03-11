@@ -86,6 +86,13 @@ $(document).ready(function(){
         i--;
       }
     }
+    for (var i=0; i<window.eaters.length; i++) {
+      if (!window.eaters[i].exists) {
+        window.eaters[i].parent && window.eaters[i].parent.die();
+        window.eaters.splice(i,1);
+        i--;
+      }
+    }
     for (var i=0; i<$('.dancer').length; i++) {
       if (!$('.dancer')[i].parent.exists)
         $('.dancer')[i].parent.die();
