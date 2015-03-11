@@ -30,10 +30,29 @@ $(document).ready(function(){
     $('body').append(dancer.$node);
     window.dancers.push(dancer);
   });
+
+  $('body').on("click", '.dancer', function(){
+    this.parent.die();
+  });
+
   $(".lineUp").on("click", function(event){
     for (var i=0; i<window.dancers.length; i++) {
       window.dancers[i].lineUp();
     }
   });
+
+  $('.reset').on('click', function(event) {
+    for (var i=0; i<window.dancers.length; i++) {
+      window.dancers[i].die();
+    }
+  });
+  setInterval(function(){
+    for (var i=0; i<window.dancers; i++) {
+      if (!window.dancers.exists) {
+        window.dancers.splice(i,1);
+        i--;
+      }
+    }
+  },200);
 });
 

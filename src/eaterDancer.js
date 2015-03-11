@@ -5,7 +5,7 @@ var EaterDancer = function(top, left, timeBetweenSteps){
   this.stepY = -Math.sin(this.direction) * this.stepDistance;
   window.eaters.push(this);
   this.borderWidth = 20;
-  Dancer.apply(this, arguments);
+  Dancer.apply(this, [top, left, 300 + timeBetweenSteps%500]);
 
   this.$node.css(
   	{'border-width': this.borderWidth + 'px',
@@ -17,23 +17,25 @@ var EaterDancer = function(top, left, timeBetweenSteps){
 EaterDancer.prototype = Object.create(Dancer.prototype);
 EaterDancer.prototype.constructor = EaterDancer;
 EaterDancer.prototype.step = function() {
-  setTimeout(this.step.bind(this), this.timeBetweenSteps);
-  this.$node.animate({
-  	'top': (this.top + this.stepY) + 'px',
-  	'left': (this.left + this.stepX) + 'px'
-  }, this.timeBetweenSteps);
+  if (this.exists) {
+    setTimeout(this.step.bind(this), this.timeBetweenSteps);
+    this.$node.animate({
+      'top': (this.top + this.stepY) + 'px',
+      'left': (this.left + this.stepX) + 'px'
+    }, this.timeBetweenSteps);
 
-  this.top += this.stepY;
-  this.left += this.stepX;
+    this.top += this.stepY;
+    this.left += this.stepX;
 
-  if (this.top < 0 && this.stepY < 0) {
-  	this.stepY *= -1;
-  } else if (this.left < 0 && this.stepX < 0) {
-  	this.stepX *= -1;
-  } else if (this.top > $("body").height() && this.stepY > 0) {
-  	this.stepY *= -1;
-  } else if (this.left > $("body").width() && this.stepX > 0) {
-  	this.stepX *= -1;
+    if (this.top < 0 && this.stepY < 0) {
+      this.stepY *= -1;
+    } else if (this.left < 0 && this.stepX < 0) {
+      this.stepX *= -1;
+    } else if (this.top + this.borderWidth*2> $("body").height() && this.stepY > 0) {
+      this.stepY *= -1;
+    } else if (this.left + this.borderWidth*2> $("body").width() && this.stepX > 0) {
+      this.stepX *= -1;
+    }
   }
 };
 
