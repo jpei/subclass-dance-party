@@ -26,8 +26,7 @@ Dancer.prototype.step = function(){
   if (this.exists) {
     setTimeout(this.step.bind(this), this.timeBetweenSteps);
     for (var i=0; i < window.eaters.length; i++) {
-      //if (Math.pow(this.top - window.eaters[i].top,2) + Math.pow(this.left - window.eaters[i].left,2) < Math.pow(window.eaters[i].borderWidth + 10, 2)) {
-      if (Math.pow((this.top+10)-(window.eaters[i].top+window.eaters[i].borderWidth),2) + (Math.pow((this.left+10)-(window.eaters[i].left+window.eaters[i].borderWidth),2)) < Math.pow(window.eaters[i].borderWidth + 10, 2) ) {
+      if (Math.pow((this.top+10)-(window.eaters[i].top+window.eaters[i].borderRadius),2) + (Math.pow((this.left+10)-(window.eaters[i].left+window.eaters[i].borderRadius),2)) < Math.pow(window.eaters[i].borderRadius + 10, 2) ) {
         this.collide();
         window.eaters[i].collide();
         break;

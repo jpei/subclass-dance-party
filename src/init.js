@@ -35,6 +35,10 @@ $(document).ready(function(){
     this.parent.die();
   });
 
+  $('.getThePartyStarted').on('click', function(event) {
+    buildEcosystem();
+  });
+
   $(".lineUp").on("click", function(event){
     for (var i=0; i<window.dancers.length; i++) {
       window.dancers[i].lineUp();
@@ -46,6 +50,30 @@ $(document).ready(function(){
       window.dancers[i].die();
     }
   });
+  var buildEcosystem = function() {
+    var dancerType;
+    var dancerMakers = ['PrancerDancer', 'BlinkyDancer', 'CandyDancer'];
+    for (var i=0; i<750; i++) {
+      dancerType = dancerMakers[Math.floor(dancerMakers.length*Math.random())];
+      var dancerMakerFunction = window[dancerType];
+      var dancer = new dancerMakerFunction(
+        $("body").height() * Math.random(),
+        $("body").width() * Math.random(),
+        Math.random() * 1000
+      );
+      $('body').append(dancer.$node);
+      window.dancers.push(dancer);
+    }
+    for (var i=0; i<10; i++) {
+      var dancer = new EaterDancer(
+        $("body").height() * Math.random(),
+        $("body").width() * Math.random(),
+        Math.random() * 1000
+      );
+      $('body').append(dancer.$node);
+      window.dancers.push(dancer);
+    }
+  }
   setInterval(function(){
     for (var i=0; i<window.dancers.length; i++) {
       if (!window.dancers[i].exists) {
@@ -58,6 +86,11 @@ $(document).ready(function(){
       if (!$('.dancer')[i].parent.exists)
         $('.dancer')[i].parent.die();
     }
+    setTimeout(function() {
+      if (window.dancers.length === window.eaters.length) {
+        buildEcosystem();
+      }
+    },10000);
   },200);
 });
 
