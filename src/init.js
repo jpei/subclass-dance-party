@@ -47,11 +47,16 @@ $(document).ready(function(){
     }
   });
   setInterval(function(){
-    for (var i=0; i<window.dancers; i++) {
-      if (!window.dancers.exists) {
+    for (var i=0; i<window.dancers.length; i++) {
+      if (!window.dancers[i].exists) {
+        window.dancers[i].parent && window.dancers[i].parent.die();
         window.dancers.splice(i,1);
         i--;
       }
+    }
+    for (var i=0; i<$('.dancer').length; i++) {
+      if (!$('.dancer')[i].parent.exists)
+        $('.dancer')[i].parent.die();
     }
   },200);
 });

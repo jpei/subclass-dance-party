@@ -10,7 +10,7 @@ var EaterDancer = function(top, left, timeBetweenSteps){
   this.$node.css(
   	{'border-width': this.borderWidth + 'px',
      'border-radius': $('body').width() + 'px',
-     'z-index': 1
+     'z-index': 1,
   });
 };
 

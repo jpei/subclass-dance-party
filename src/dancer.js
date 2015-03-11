@@ -60,6 +60,7 @@ Dancer.prototype.makeManyDancers = function() {
 
 Dancer.prototype.lineUp = function() {
   this.$node.animate({top:$("body").height()/2}, 5000);
+  this.top = $('body').height()/2;
 };
 
 Dancer.prototype.collide = function() {
