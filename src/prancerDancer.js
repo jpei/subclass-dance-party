@@ -9,17 +9,18 @@ PrancerDancer.prototype.constructor = PrancerDancer;
 PrancerDancer.prototype.step = function() {
   Dancer.prototype.step.call(this);
   if (Math.floor(this.stepCount)===0) {
-  	this.$node.animate({'top':(this.top+this.stepDistance)+'px'},this.timeBetweenSteps);
+  	this.top += this.stepDistance;
   }
   if (Math.floor(this.stepCount)===1) {
-  	this.$node.animate({'left':(this.left+this.stepDistance)+'px'},this.timeBetweenSteps);
+    this.left += this.stepDistance;
   }
   if (Math.floor(this.stepCount)===2) {
-  	this.$node.animate({'top':(this.top-this.stepDistance)+'px'},this.timeBetweenSteps);
+    this.top -= this.stepDistance;
   }
   if (Math.floor(this.stepCount)===3) {
-  	this.$node.animate({'left':(this.left-this.stepDistance)+'px'},this.timeBetweenSteps);
+    this.left -= this.stepDistance;
   }
+  this.$node.animate({'top':this.top+'px', 'left':this.left+'px'},this.timeBetweenSteps);
   this.stepCount = (this.stepCount+1)%4;
 };
 
