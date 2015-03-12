@@ -32,6 +32,8 @@ Dancer.prototype.step = function(){
         break;
       }
     }
+    if (this.top > $("body").height()-20 || this.left > $("body").width()-20)
+      this.die();
   }
 };
 
@@ -48,8 +50,8 @@ Dancer.prototype.setPosition = function(top, left){
 Dancer.prototype.makeManyDancers = function() {
   for (var i=0; i<9; i++) {
     var dancer = new this.__proto__.constructor(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+      ($("body").height()-20) * Math.random(),
+      ($("body").width()-20) * Math.random(),
       Math.random() * 1000
     );
     $('body').append(dancer.$node);
