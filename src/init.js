@@ -23,8 +23,8 @@ $(document).ready(function(){
     // make a dancer with a random position
 
     var dancer = dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+      ($("body").height()-20-32) * Math.random()+32, // Spawn fully on screen without covering top bar
+      ($("body").width()-20-32) * Math.random()+32,
       Math.random() * 1000
     );
     $('body').append(dancer.$node);
@@ -61,8 +61,8 @@ $(document).ready(function(){
       dancerType = dancerMakers[Math.floor(dancerMakers.length*Math.random())];
       var dancerMakerFunction = window[dancerType];
       var dancer = new dancerMakerFunction(
-        $("body").height() * Math.random(),
-        $("body").width() * Math.random(),
+        ($("body").height()-20-32) * Math.random()+32, // Spawn fully on screen without covering top bar
+        ($("body").width()-20-32) * Math.random()+32,
         Math.random() * 1000
       );
       $('body').append(dancer.$node);
@@ -70,8 +70,8 @@ $(document).ready(function(){
     }
     for (var i=0; i<10; i++) {
       var dancer = new EaterDancer(
-        $("body").height() * Math.random(),
-        $("body").width() * Math.random(),
+        ($("body").height()-20-32) * Math.random()+32, // Spawn fully on screen without covering top bar
+        ($("body").width()-20-32) * Math.random()+32,
         Math.random() * 1000
       );
       $('body').append(dancer.$node);

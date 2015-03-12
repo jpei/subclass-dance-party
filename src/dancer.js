@@ -32,7 +32,7 @@ Dancer.prototype.step = function(){
         break;
       }
     }
-    if (this.top > $("body").height()-20 || this.left > $("body").width()-20)
+    if (this.top > $("body").height()-20 || this.left > $("body").width()-20 || this.top < 0 || this.left < 0)
       this.die();
   }
 };
@@ -50,8 +50,8 @@ Dancer.prototype.setPosition = function(top, left){
 Dancer.prototype.makeManyDancers = function() {
   for (var i=0; i<9; i++) {
     var dancer = new this.__proto__.constructor(
-      ($("body").height()-20) * Math.random(),
-      ($("body").width()-20) * Math.random(),
+      ($("body").height()-20-32) * Math.random()+32, // Spawn fully on screen without covering top bar
+      ($("body").width()-20-32) * Math.random()+32,
       Math.random() * 1000
     );
     $('body').append(dancer.$node);
